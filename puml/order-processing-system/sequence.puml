@@ -1,0 +1,26 @@
+@startuml Sequence Diagram
+
+title Order Processing System
+
+actor Customer
+participant "Order Service" as Order
+participant "Payment Service" as Payment
+participant "Shipping Service" as Shipping
+
+Customer -> Order : Place Order
+activate Order
+
+Order -> Payment : Request Payment
+activate Payment
+Payment -->> Order : Confirm Payment
+deactivate Payment
+
+Order -> Shipping : Request Shipping
+activate Shipping
+Shipping -->> Order :Confirm Shipping
+deactivate Shipping
+
+Order -->> Customer : Order Confirmation
+deactivate Order
+
+@endyaml

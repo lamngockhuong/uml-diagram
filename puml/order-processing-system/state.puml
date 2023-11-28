@@ -1,0 +1,15 @@
+@startuml Sequence Diagram
+
+title Order Processing System
+
+[*] --> New
+New --> Processing : Order Placed
+
+Processing --> Shipped : Payment Confirmed
+Shipped --> Delivered : Shipment Arrived
+Delivered --> [*] : Order Completed
+
+Processing --> Cancelled : Order Cancelled
+Cancelled --> [*] : End
+
+@endyaml

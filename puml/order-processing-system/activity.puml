@@ -1,0 +1,17 @@
+@startuml Activity Diagram
+
+title Order Processing System
+
+start
+:Customer places order;
+:Order Service processes order;
+if (Payment successful?) then (yes)
+    :Payment Service processes payment;
+    :Shipping Service processes shipping;
+    :Order Service sends confirmation;
+else (no)
+    :Order Service sends failure notification;
+endif
+stop
+
+@endyaml
