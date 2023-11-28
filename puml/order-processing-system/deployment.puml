@@ -1,0 +1,29 @@
+@startuml Deployment Diagram
+
+title Order Processing System
+
+node "User Device" {
+    [Web Browser]
+}
+
+node "Order Processing System" {
+    [Order Service]
+    [Payment Service]
+    [Shipping Service]
+}
+
+node "Database Server" {
+    database "Order Database" {
+        [Orders]
+        [Payments]
+        [Shipments]
+    }
+}
+
+[Web Browser] --> [Order Service] : Sends order
+[Order Service] --> [Payment Service] : Request payment
+[Payment Service] --> [Order Database] : Update payment status
+[Order Service] --> [Shipping Service] : Request shipment
+[Shipping Service] --> [Order Database] : Update shipment status
+
+@endyaml

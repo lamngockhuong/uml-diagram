@@ -1,4 +1,4 @@
-@startuml component
+@startuml Component Diagram
 
 title Order Processing System
 

@@ -1,0 +1,30 @@
+@startuml Sequence Diagram
+
+title Order Processing System
+
+class Order {
+    +orderId: Integer
+    +date: Date
+    +status: String
+    +placeOrder()
+    +cancelOrder()
+}
+
+class Payment {
+    +paymentId: Integer
+    +amount: Double
+    +makePayment()
+    +refundPayment()
+}
+
+class Shipping {
+    +shippingId: Integer
+    +address: String
+    +shipOrder()
+    +trackOrder()
+}
+
+Order "1" -- "1" Payment : makes >
+Order "1" == "1" Shipping : requests >
+
+@endyaml
