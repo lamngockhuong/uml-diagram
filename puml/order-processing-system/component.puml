@@ -1,0 +1,37 @@
+@startuml component
+
+title Order Processing System
+
+() IOrder
+() IRequestPayment
+() IConfirmPayment
+() IOrderStatusCustomer
+() IRequestShipping
+() IOrderAnalytics
+
+[Storefront] as storefront
+[Order Processer] as processer
+[Payment Service] as payment
+[Customer Service] as customer_service
+[Analytics] as analytics
+[Shipping] as shipping
+
+storefront -down- IOrder
+processer -up-( IOrder
+
+processer -down- IRequestPayment
+payment -up-( IRequestPayment
+
+payment -down- IConfirmPayment
+processer -up-( IConfirmPayment
+
+processer -down- IRequestShipping
+shipping -up-( IRequestShipping
+
+processer -down- IOrderAnalytics
+analytics -up-( IOrderAnalytics
+
+shipping -down- IOrderStatusCustomer
+customer_service -up-( IOrderStatusCustomer
+
+@enduml

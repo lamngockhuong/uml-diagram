@@ -1,0 +1,23 @@
+@startuml use case
+
+title Order Processing System
+
+left to right direction
+actor Customer as cus
+actor Merchants as mer
+
+package "Order Process System" {
+    usecase "Create order" as UC1
+    usecase "View order" as UC2
+    usecase "Cancel order" as UC3
+    usecase "View order history" as UC4
+    usecase "Process order" as UC5
+}
+
+cus --> UC1
+cus --> UC2
+cus --> UC3
+cus --> UC4
+mer --> UC5
+
+@enduml
