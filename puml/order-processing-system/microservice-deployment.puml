@@ -1,29 +1,50 @@
 @startuml Deployment Diagram
 
-title Order Processing System
+title Order Processing System - Microservice Architecture
 
 node "User Device" {
-    [Web Browser]
+  [Web Browser]
 }
 
-node "Order Processing System" {
+node "API Gateway" {
+}
+
+node "E-commerce System" {
     [Order Service]
+    [Product Catelog Service]
+    [User Service]
     [Payment Service]
-    [Shipping Service]
+    [Inventory Service]
 }
 
 node "Database Server" {
+    database "Inventory Database" {
+        [Inventory]
+    }
+    database "User Database" {
+        [Users]
+    }
+    database "Product Database" {
+        [Products]
+    }
     database "Order Database" {
         [Orders]
-        [Payments]
-        [Shipments]
     }
 }
 
-[Web Browser] --> [Order Service] : Sends order
-[Order Service] --> [Payment Service] : Request payment
-[Payment Service] --> [Order Database] : Update payment status
-[Order Service] --> [Shipping Service] : Request shipment
-[Shipping Service] --> [Order Database] : Update shipment status
+[Web Browser] --> [API Gateway] : Sends request
+[API Gateway] --> [Order Service] : Place order
+[Order Service] --> [Payment Service] : Process payment
+
+[Order Service] --> [Inventory Service] : Check inventory
+[Inventory Service] --> [Inventory Database] : Fetch inventory data
+
+[Order Service] --> [Order Database] : Update order
+
+[API Gateway] --> [Product Catelog Service] : Browser products
+[Product Catelog Service] --> [Product Database] : Fetch products
+
+[API Gateway] --> [User Service] : User actions
+[User Service] --> [User Database] : Fetch user data
 
 @endyaml
